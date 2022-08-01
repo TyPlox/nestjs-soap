@@ -13,7 +13,7 @@ interface Auth {
 export interface BasicAuth extends Auth { }
 
 export interface WSSecurityAuth extends Auth {
-  options?: WSSecurityOptions
+  options?: WSSecurityOptions;
 }
 
 export type WSSecurityOptions = {
@@ -25,10 +25,25 @@ export type WSSecurityOptions = {
   actor?: string;
 };
 
+export interface SSLSecurityPFXAuth {
+  pfx: string | Buffer;
+  passphrase: string;
+  options?: SSLSecurityPFXOptions;
+}
+
+export type SSLSecurityPFXOptions = {
+  strictSSL?: boolean;
+  rejectUnauthorized?: boolean;
+  hostname?: string;
+  secureOptions?: any;
+  forever?: string;
+};
+
 export type SoapModuleOptions = {
   uri: string;
   clientName: string;
   auth?: BasicAuth | WSSecurityAuth;
+  sslPFX?: SSLSecurityPFXAuth;
   clientOptions?: IOptions;
 };
 
